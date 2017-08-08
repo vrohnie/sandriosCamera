@@ -57,6 +57,7 @@ public final class CameraConfiguration {
         String SHOW_PICKER = "com.sandrios.sandriosCamera.show_picker";
         String PICKER_TYPE = "com.sandrios.sandriosCamera.picker_type";
         String ENABLE_CROP = "com.sandrios.sandriosCamera.enable_crop";
+        String IS_PRIVATE = "com.sandrios.sandriosCamera.is_private";
     }
 
     @IntDef({MEDIA_QUALITY_AUTO, MEDIA_QUALITY_LOWEST, MEDIA_QUALITY_LOW, MEDIA_QUALITY_MEDIUM, MEDIA_QUALITY_HIGH, MEDIA_QUALITY_HIGHEST})

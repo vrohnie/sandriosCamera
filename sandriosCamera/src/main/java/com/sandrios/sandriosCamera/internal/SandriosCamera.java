@@ -28,6 +28,7 @@ public class SandriosCamera {
     private int type = 501;
     private boolean enableImageCrop = false;
     private long videoSize = -1;
+    private boolean isPrivate = false;
 
     /***
      * Creates SandriosCamera instance with default configuration set to both.
@@ -39,6 +40,11 @@ public class SandriosCamera {
         mInstance = this;
         mActivity = activity;
         requestCode = code;
+    }
+
+    public SandriosCamera setPrivacy(boolean isPrivate) {
+        this.isPrivate = isPrivate;
+        return mInstance;
     }
 
     public SandriosCamera setShowPickerType(int type) {
@@ -99,6 +105,7 @@ public class SandriosCamera {
             cameraIntent.putExtra(CameraConfiguration.Arguments.PICKER_TYPE, type);
             cameraIntent.putExtra(CameraConfiguration.Arguments.MEDIA_ACTION, mediaAction);
             cameraIntent.putExtra(CameraConfiguration.Arguments.ENABLE_CROP, enableImageCrop);
+            cameraIntent.putExtra(CameraConfiguration.Arguments.IS_PRIVATE, isPrivate);
             if (videoSize > 0) {
                 cameraIntent.putExtra(CameraConfiguration.Arguments.VIDEO_FILE_SIZE, videoSize * 1024 * 1024);
             }

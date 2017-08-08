@@ -22,6 +22,7 @@ import com.sandrios.sandriosCamera.internal.ui.view.CameraSwitchView;
 import com.sandrios.sandriosCamera.internal.ui.view.FlashSwitchView;
 import com.sandrios.sandriosCamera.internal.ui.view.MediaActionSwitchView;
 import com.sandrios.sandriosCamera.internal.ui.view.RecordButton;
+import com.sandrios.sandriosCamera.internal.utils.CameraHelper;
 import com.sandrios.sandriosCamera.internal.utils.Size;
 import com.sandrios.sandriosCamera.internal.utils.Utils;
 
@@ -54,6 +55,7 @@ public abstract class BaseSandriosActivity<CameraId> extends SandriosCameraActiv
     protected long videoFileSize = -1;
     protected int minimumVideoDuration = -1;
     protected boolean showPicker = true;
+    protected boolean isPrivate = false;
     protected int type;
     @MediaActionSwitchView.MediaActionState
     protected int currentMediaActionState;
@@ -163,6 +165,10 @@ public abstract class BaseSandriosActivity<CameraId> extends SandriosCameraActiv
 
             if (bundle.containsKey(CameraConfiguration.Arguments.SHOW_PICKER))
                 showPicker = bundle.getBoolean(CameraConfiguration.Arguments.SHOW_PICKER);
+
+            if (bundle.containsKey(CameraConfiguration.Arguments.IS_PRIVATE))
+                CameraHelper.setPrivacy(bundle.getBoolean(CameraConfiguration.Arguments
+                        .IS_PRIVATE));
 
             if (bundle.containsKey(CameraConfiguration.Arguments.PICKER_TYPE))
                 type = bundle.getInt(CameraConfiguration.Arguments.PICKER_TYPE);

@@ -30,10 +30,15 @@ import java.util.List;
 public final class CameraHelper {
 
     public final static String TAG = "CameraHelper";
+    private static boolean isPrivate = false;
 
 
     private CameraHelper() {
 
+    }
+
+    public static void setPrivacy(boolean privacy){
+        isPrivate = privacy;
     }
 
     public static boolean hasCamera(Context context) {
@@ -73,13 +78,28 @@ public final class CameraHelper {
     }
 
     public static File getOutputMediaFile(Context context, @CameraConfiguration.MediaAction int mediaAction) {
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), context.getPackageName());
 
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d(TAG, "Failed to create directory.");
-                return null;
+        File mediaStorageDir = null;
+
+        if(isPrivate) {
+            mediaStorageDir = new File(Environment.getExternalStorageDirectory(), Environment
+                    .DIRECTORY_PICTURES);
+
+            if (!mediaStorageDir.exists()) {
+                if (!mediaStorageDir.mkdirs()) {
+                    Log.d(TAG, "Failed to create directory.");
+                    return null;
+                }
+            }
+        } else {
+            mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_PICTURES), context.getPackageName());
+
+            if (!mediaStorageDir.exists()) {
+                if (!mediaStorageDir.mkdirs()) {
+                    Log.d(TAG, "Failed to create directory.");
+                    return null;
+                }
             }
         }
 
